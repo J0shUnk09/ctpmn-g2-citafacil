@@ -5,6 +5,7 @@ import BookingForm from '../components/BookingForm.jsx'
 import { businessConfig } from '../data/businessConfig.js'
 import { services } from '../data/services.js'
 import '../styles/booking.css'
+import { createAppointment } from '../utils/appointmentUtils.js'
 
 function BookingPage({ appointments, onAddAppointment }) {
   const [searchParams] = useSearchParams()
@@ -17,7 +18,8 @@ function BookingPage({ appointments, onAddAppointment }) {
     ? requestedId
     : ''
 
-  const handleBooked = (appointment) => {
+  const handleSubmit = (values, service) => {
+    const appointment = createAppointment(values, service)
     onAddAppointment(appointment)
     setConfirmedAppointment(appointment)
   }
@@ -40,7 +42,7 @@ function BookingPage({ appointments, onAddAppointment }) {
           appointments={appointments}
           config={businessConfig}
           initialServiceId={initialServiceId}
-          onBooked={handleBooked}
+          onSubmit={handleSubmit}
         />
       )}
     </section>

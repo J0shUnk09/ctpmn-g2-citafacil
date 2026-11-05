@@ -19,6 +19,15 @@ function App() {
   const addAppointment = (appointment) =>
     setAppointments((current) => [...current, appointment])
 
+  // Cambia solo los campos indicados de la cita con ese id.
+  const updateAppointment = (id, changes) =>
+    setAppointments((current) =>
+      current.map((item) => (item.id === id ? { ...item, ...changes } : item)),
+    )
+
+  const deleteAppointment = (id) =>
+    setAppointments((current) => current.filter((item) => item.id !== id))
+
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -32,7 +41,16 @@ function App() {
             />
           }
         />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route
+          path="/admin"
+          element={
+            <AdminPage
+              appointments={appointments}
+              onUpdateAppointment={updateAppointment}
+              onDeleteAppointment={deleteAppointment}
+            />
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
