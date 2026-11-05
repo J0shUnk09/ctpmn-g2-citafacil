@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import {
-  createAppointment,
   getAvailableSlots,
   getBusinessHours,
   validateBooking,
@@ -10,21 +9,40 @@ import { formatCurrency, formatDuration } from '../utils/formatUtils.js'
 import AvailableSlots from './AvailableSlots.jsx'
 import FormField from './FormField.jsx'
 
+// Sirve para reservar (appointment = null) y para editar una cita existente.
+// Al enviar llama onSubmit(values, servicioElegido); quien lo usa decide qué hacer.
 function BookingForm({
   services,
   appointments,
   config,
   initialServiceId = '',
-  onBooked,
+  appointment = null,
+  submitLabel = 'Confirmar reserva',
+  onSubmit,
+  onCancel,
 }) {
-  const [values, setValues] = useState({
-    customerName: '',
-    phone: '',
-    serviceId: initialServiceId,
-    date: '',
-    time: '',
-  })
+  const [values, setValues] = useState(() =>
+    appointment
+      ? {
+          customerName: appointment.customerName,
+          phone: appointment.phone,
+          serviceId: appointment.serviceId,
+          date: appointment.date,
+          time: appointment.time,
+        }
+      : {
+          customerName: '',
+          phone: '',
+          serviceId: initialServiceId,
+          date: '',
+          time: '',
+        },
+  )
   const [errors, setErrors] = useState({})
+
+  // Al editar, la propia cita no cuenta como ocupada (si no, nunca podría
+  // conservar su mismo horario).
+  const ignoreId = appointment ? appointment.id : null
 
   const selectedService = services.find((item) => item.id === values.serviceId)
 
@@ -37,6 +55,7 @@ function BookingForm({
           durationMinutes: selectedService.durationMinutes,
           appointments,
           config,
+          ignoreId,
         })
       : []
 
@@ -85,11 +104,12 @@ function BookingForm({
       services,
       appointments,
       config,
+      ignoreId,
     })
     setErrors(foundErrors)
     if (Object.keys(foundErrors).length > 0) return
 
-    onBooked(createAppointment(values, selectedService))
+    onSubmit(values, selectedService)
   }
 
   // Atributos comunes de cada campo controlado (valor, evento y accesibilidad).
@@ -152,9 +172,16 @@ function BookingForm({
         error={errors.time}
       />
 
-      <button type="submit" className="btn btn-primary">
-        Confirmar reserva
-      </button>
+      <div className="form-actions">
+        <button type="submit" className="btn btn-primary">
+          {submitLabel}
+        </button>
+        {onCancel && (
+          <button type="button" className="btn btn-secondary" onClick={onCancel}>
+            Cancelar edición
+          </button>
+        )}
+      </div>
     </form>
   )
 }
