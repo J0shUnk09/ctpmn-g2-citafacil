@@ -1,0 +1,179 @@
+/* ===== Encabezado y navegación (Flexbox) ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(
+      90deg,
+      var(--color-red),
+      var(--color-accent),
+      var(--color-accent-light)
+    )
+    1;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.75rem var(--space-md);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--color-accent-light);
+}
+
+.nav-link.is-active {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.menu-toggle {
+  display: none;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  border-radius: 8px;
+  color: var(--color-accent);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===== Contenido principal (Grid) ===== */
+.main-container {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  gap: var(--space-xl);
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.hero {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-md);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-red);
+  border-radius: var(--radius);
+}
+
+/* Espacio entre el título de una sección y su contenido (el hero usa gap) */
+.main-container > section:not(.hero) > * + * {
+  margin-top: var(--space-md);
+}
+
+.hero h1 {
+  max-width: 28ch;
+}
+
+.hero p {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}
+
+/* ===== Pie de página ===== */
+.site-footer {
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-top: 3px solid var(--color-accent);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.site-footer p + p {
+  margin-top: 0.25rem;
+}
+
+/* ===== Celular (hasta 640px) ===== */
+@media (max-width: 640px) {
+  .site-header__inner {
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  .main-nav {
+    display: none;
+    width: 100%;
+  }
+
+  .main-nav.is-open {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-link {
+    padding: 0.75rem 0;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ===== Computadora (desde 1024px) ===== */
+@media (min-width: 1024px) {
+  .site-header__inner {
+    padding: 1rem var(--space-lg);
+  }
+
+  .main-container {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+}
