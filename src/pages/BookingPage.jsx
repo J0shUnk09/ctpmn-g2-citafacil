@@ -1,12 +1,48 @@
-function BookingPage() {
+import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import BookingConfirmation from '../components/BookingConfirmation.jsx'
+import BookingForm from '../components/BookingForm.jsx'
+import { businessConfig } from '../data/businessConfig.js'
+import { services } from '../data/services.js'
+import '../styles/booking.css'
+
+function BookingPage({ appointments, onAddAppointment }) {
+  const [searchParams] = useSearchParams()
+  const [confirmedAppointment, setConfirmedAppointment] = useState(null)
+
+  // Si se llegó desde una tarjeta del catálogo (/reservar?servicio=corte),
+  // ese servicio queda preseleccionado.
+  const requestedId = searchParams.get('servicio')
+  const initialServiceId = services.some((service) => service.id === requestedId)
+    ? requestedId
+    : ''
+
+  const handleBooked = (appointment) => {
+    onAddAppointment(appointment)
+    setConfirmedAppointment(appointment)
+  }
+
   return (
-    <section aria-labelledby="booking-title">
+    <section className="booking" aria-labelledby="booking-title">
       <h1 id="booking-title">Reservar cita</h1>
-      <div className="card">
-        <p className="muted">
-          Aquí aparecerá el formulario de reserva (Etapa 2).
-        </p>
-      </div>
+      <p className="muted">
+        Elige servicio y fecha: solo se muestran los horarios libres.
+      </p>
+
+      {confirmedAppointment ? (
+        <BookingConfirmation
+          appointment={confirmedAppointment}
+          onNewBooking={() => setConfirmedAppointment(null)}
+        />
+      ) : (
+        <BookingForm
+          services={services}
+          appointments={appointments}
+          config={businessConfig}
+          initialServiceId={initialServiceId}
+          onBooked={handleBooked}
+        />
+      )}
     </section>
   )
 }
