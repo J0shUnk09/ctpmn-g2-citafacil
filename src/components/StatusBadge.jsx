@@ -1,0 +1,12 @@
+import { STATUS_LABELS } from '../utils/appointmentUtils.js'
+
+// El estado se distingue por texto Y color (no solo por color).
+function StatusBadge({ status }) {
+  return (
+    <span className={`badge badge--${status}`}>
+      {STATUS_LABELS[status] ?? status}
+    </span>
+  )
+}
+
+export default StatusBadge

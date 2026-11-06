@@ -1,0 +1,177 @@
+/* ===== Panel de administración ===== */
+.admin {
+  /* Colores de estado y de avisos (todos legibles sobre fondo oscuro) */
+  --color-error: #ff9b94;
+  --color-success: #6fd3a0;
+  --status-pending: #e2b968;
+  --status-confirmed: #8ec5f0;
+  --status-completed: #6fd3a0;
+  --status-cancelled: #ff9b94;
+}
+
+/* ===== Filtros ===== */
+.admin-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  align-items: start;
+  gap: var(--space-md);
+}
+
+.admin-filters__date {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.admin-filters__date input {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-summary {
+  color: var(--color-text-muted);
+}
+
+.admin-summary strong {
+  color: var(--color-text);
+}
+
+/* ===== Botones pequeños y de peligro ===== */
+.btn.btn-small {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.btn.btn-danger {
+  background: transparent;
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.btn.btn-danger:hover {
+  background: var(--color-surface-alt);
+}
+
+/* ===== Lista y tarjetas de citas ===== */
+.appointment-list {
+  display: grid;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.appointment-card {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.appointment-card--pending {
+  border-top-color: var(--status-pending);
+}
+
+.appointment-card--confirmed {
+  border-top-color: var(--status-confirmed);
+}
+
+.appointment-card--completed {
+  border-top-color: var(--status-completed);
+}
+
+.appointment-card--cancelled {
+  border-top-color: var(--status-cancelled);
+}
+
+.appointment-card--cancelled h3 {
+  text-decoration: line-through;
+}
+
+.appointment-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.appointment-card__details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem var(--space-md);
+  margin: 0;
+}
+
+/* Celular: 2 columnas */
+@media (max-width: 640px) {
+  .appointment-card__details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.appointment-card__details dt {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.appointment-card__details dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.appointment-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.confirm-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+  padding: 0.75rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-error);
+  border-radius: 8px;
+}
+
+.confirm-bar p {
+  flex: 1 1 14rem;
+}
+
+/* ===== Insignias de estado (texto oscuro sobre color claro) ===== */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  color: var(--color-text-on-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.badge--pending {
+  background: var(--status-pending);
+}
+
+.badge--confirmed {
+  background: var(--status-confirmed);
+}
+
+.badge--completed {
+  background: var(--status-completed);
+}
+
+.badge--cancelled {
+  background: var(--status-cancelled);
+}
+
+/* ===== Edición dentro de la lista ===== */
+.admin-edit > * + * {
+  margin-top: var(--space-md);
+}
+
+/* Botones del formulario de reserva (también se usa al editar una cita) */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}

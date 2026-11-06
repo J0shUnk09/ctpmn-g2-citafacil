@@ -1,0 +1,148 @@
+/* ===== Reservas: formulario, horarios y confirmación ===== */
+.booking {
+  /* Colores propios de esta página (error y éxito legibles sobre fondo oscuro) */
+  --color-error: #ff9b94;
+  --color-success: #6fd3a0;
+
+  width: 100%;
+  max-width: 46rem;
+}
+
+.booking-form {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--space-md);
+}
+
+.form-field {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+}
+
+.form-field label,
+.slots legend {
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 0.7rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text);
+  color-scheme: dark;
+}
+
+.form-field input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.8;
+}
+
+.form-field [aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.field-error {
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+/* ===== Selector de horas ===== */
+.slots {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.slots legend {
+  padding: 0;
+  margin-bottom: var(--space-sm);
+}
+
+.slots__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.slot {
+  position: relative;
+}
+
+.slot input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.slot span {
+  display: block;
+  padding: 0.5rem 0.9rem;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.slot:hover span {
+  border-color: var(--color-accent);
+}
+
+.slot input:checked + span {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text-on-accent);
+}
+
+.slot input:focus-visible + span {
+  outline: 3px solid var(--color-accent-light);
+  outline-offset: 2px;
+}
+
+.booking-form .btn {
+  justify-self: start;
+}
+
+/* ===== Confirmación ===== */
+.confirmation {
+  display: grid;
+  gap: var(--space-md);
+  border-top-color: var(--color-success);
+}
+
+.confirmation h2 {
+  color: var(--color-success);
+}
+
+.summary-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem var(--space-lg);
+  margin: 0;
+}
+
+.summary-list dt {
+  color: var(--color-text-muted);
+}
+
+.summary-list dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.confirmation__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
