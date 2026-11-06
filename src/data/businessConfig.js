@@ -1,6 +1,5 @@
 // Configuración del negocio de demostración.
-// Para usar CitaFácil con otro negocio basta con editar este archivo
-// (y src/data/services.js); los componentes no cambian.
+// Para usar CitaFácil con otro negocio solo es editar este archivo
 export const businessConfig = {
   name: 'Barbería Demo',
   locale: 'es-CR',

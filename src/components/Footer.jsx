@@ -3,10 +3,9 @@ const currentYear = new Date().getFullYear()
 function Footer() {
   return (
     <footer className="site-footer">
-      <p>© {currentYear} CitaFácil · CTP Mercedes Norte · Prototipo educativo</p>
+      <p>© {currentYear} CitaFácil · CTP Mercedes Norte · Grupo 2</p>
       <p className="site-footer__note">
-        Las citas se guardan solo en este navegador (localStorage). No hay
-        servidor ni base de datos compartida.
+        Los datos solo se guardan en (localStorage).
       </p>
     </footer>
   )

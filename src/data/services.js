@@ -1,5 +1,5 @@
 // Servicios y precios de DEMOSTRACIÓN: no son tarifas reales de ningún negocio.
-// Puedes agregar, quitar o editar servicios; el id debe ser único.
+// Puedes agregar, quitar o editar servicios, el id debe ser único.
 export const services = [
   {
     id: 'corte',
